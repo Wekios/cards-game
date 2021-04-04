@@ -1,7 +1,10 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import gameReducer from "features/Game/gameSlice";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    game: gameReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

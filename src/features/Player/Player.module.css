@@ -1,0 +1,36 @@
+.hand {
+  display: flex;
+  max-width: 600px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.npcHand {
+  padding-left: 50px;
+}
+
+.userHand {
+  padding-left: 25px;
+}
+
+.card {
+  flex-basis: 75px;
+}
+
+.userCard {
+  cursor: grab;
+  margin-left: -25px;
+}
+
+.userCard:hover {
+  transform: translateY(-10px);
+}
+
+.npcCard {
+  margin-left: -50px;
+  background: center / contain no-repeat url("assets/card-back.jpg");
+}
+
+.npcCard img {
+  visibility: hidden;
+}

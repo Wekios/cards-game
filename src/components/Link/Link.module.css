@@ -1,0 +1,11 @@
+.link {
+  width: 100%;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 50px;
+  color: #ffffff;
+  background-color: #880000;
+  margin-bottom: 15px;
+}
