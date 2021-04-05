@@ -40,30 +40,6 @@ export const MAX_PLAYER_COUNT = 4;
 export const isInPlayerCountRange = (num: number) => num >= MIN_PLAYER_COUNT && num <= MAX_PLAYER_COUNT;
 
 /**
- * Simple algorithm: who had the highest||same card last takes the lead
- * @param discard played cards during the round
- * @returns round winner
- */
-export const determineRoundWinner = (discard: CardDiscard[]) => {
-  const formattedDiscard = discard.map((dis) => ({
-    ...dis,
-    cardValue: cardValuesLookup(dis.card.value),
-  }));
-
-  return formattedDiscard.reduce(
-    (acc, cur) => {
-      if (acc.cardValue <= cur.cardValue) {
-        acc.id = cur.player.id;
-        acc.cardValue = cur.cardValue;
-      }
-      acc.scoreSum += cur.cardValue;
-      return acc;
-    },
-    { id: 0, scoreSum: 0, cardValue: 0 }
-  );
-};
-
-/**
  * Simulates real life deal where each player gets dealt one card per draw.
  * Perhaps unnecessary because cards are already shuffled but I thought it was nice to implement,
  * and using remainder (%) operator makes me feel cool. (also we can use the same deck always)
@@ -90,4 +66,38 @@ export function dealCards(deck: CardType[], count: number): PlayerType[] {
     }
   }
   return players;
+}
+
+/**
+ * Simple algorithm: who had the highest||same card last takes the lead
+ * @param discard played cards during the round
+ * @returns round winner
+ */
+export const determineRoundWinner = (discard: CardDiscard[]) => {
+  const formattedDiscard = discard.map((dis) => ({
+    ...dis,
+    cardValue: cardValuesLookup(dis.card.value),
+  }));
+
+  return formattedDiscard.reduce(
+    (acc, cur) => {
+      if (acc.cardValue <= cur.cardValue) {
+        acc.id = cur.player.id;
+        acc.cardValue = cur.cardValue;
+      }
+      acc.scoreSum += cur.cardValue;
+      return acc;
+    },
+    { id: 0, scoreSum: 0, cardValue: 0 }
+  );
+};
+
+/**
+ * It's possible that there are multiple winners per game.
+ * @param players Array of players
+ * @returns Array of winner|s
+ */
+export function determineGameWinner(players: PlayerType[]) {
+  const highestScoreWinner = players.reduce((prev, current) => (prev.score > current.score ? prev : current));
+  return players.filter(({ score }) => highestScoreWinner.score === score);
 }
