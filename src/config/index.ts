@@ -1,4 +1,4 @@
-import { CardDiscard, CardType } from "model";
+import { CardDiscard, CardType, PlayerType } from "model";
 
 /**
  * Names mapped to the key, user is always key: 0
@@ -62,3 +62,32 @@ export const determineRoundWinner = (discard: CardDiscard[]) => {
     { id: 0, scoreSum: 0, cardValue: 0 }
   );
 };
+
+/**
+ * Simulates real life deal where each player gets dealt one card per draw.
+ * Perhaps unnecessary because cards are already shuffled but I thought it was nice to implement,
+ * and using remainder (%) operator makes me feel cool. (also we can use the same deck always)
+ * @param deck fresh deck of cards
+ * @param count number of players
+ * @returns Array of players
+ */
+export function dealCards(deck: CardType[], count: number): PlayerType[] {
+  const players: PlayerType[] = [];
+
+  for (let i = 0; i < deck.length; i++) {
+    const playerIndex = i % count;
+    const card = deck[i];
+    if (!players[playerIndex]) {
+      players[playerIndex] = {
+        id: playerIndex,
+        name: playersNames[playerIndex],
+        hand: [card],
+        turnToPlay: false,
+        score: 0,
+      };
+    } else {
+      players[playerIndex].hand.push(card);
+    }
+  }
+  return players;
+}

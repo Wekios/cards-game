@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { cardsAPI } from "services/cards-client";
-import { CardType, PlayerType, CardDiscard } from "model";
-import { cardValuesLookup, playersNames } from "config";
+import { PlayerType, CardDiscard } from "model";
+import { cardValuesLookup, dealCards } from "config";
 import { RootState } from "app/store";
 
 export interface GameState {
@@ -61,33 +61,11 @@ export const gameSlice = createSlice({
     });
     builder.addCase(startGame.fulfilled, (state, { payload }) => {
       state.playerCount = payload.count;
-      const players = testableDeal(payload.cards, state.playerCount);
+      state.players = dealCards(payload.cards, state.playerCount);
       state.status = "success";
-      state.players = players;
     });
   },
 });
-
-function testableDeal(deck: CardType[], count: number): PlayerType[] {
-  const players: PlayerType[] = [];
-
-  for (let i = 0; i < deck.length; i++) {
-    const playerIndex = i % count;
-    const card = deck[i];
-    if (!players[playerIndex]) {
-      players[playerIndex] = {
-        id: playerIndex,
-        name: playersNames[playerIndex],
-        hand: [card],
-        turnToPlay: false,
-        score: 0,
-      };
-    } else {
-      players[playerIndex].hand.push(card);
-    }
-  }
-  return players;
-}
 
 export const selectGameState = (state: RootState) => state.game;
 
