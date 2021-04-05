@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Wekios/react-gh-pages/static/css/main.05d06ecc.chunk.css",
+    "main.js": "/Wekios/react-gh-pages/static/js/main.e92e57cf.chunk.js",
+    "main.js.map": "/Wekios/react-gh-pages/static/js/main.e92e57cf.chunk.js.map",
+    "runtime-main.js": "/Wekios/react-gh-pages/static/js/runtime-main.dfaea8af.js",
+    "runtime-main.js.map": "/Wekios/react-gh-pages/static/js/runtime-main.dfaea8af.js.map",
+    "static/js/2.5d79d665.chunk.js": "/Wekios/react-gh-pages/static/js/2.5d79d665.chunk.js",
+    "static/js/2.5d79d665.chunk.js.map": "/Wekios/react-gh-pages/static/js/2.5d79d665.chunk.js.map",
+    "index.html": "/Wekios/react-gh-pages/index.html",
+    "static/css/main.05d06ecc.chunk.css.map": "/Wekios/react-gh-pages/static/css/main.05d06ecc.chunk.css.map",
+    "static/js/2.5d79d665.chunk.js.LICENSE.txt": "/Wekios/react-gh-pages/static/js/2.5d79d665.chunk.js.LICENSE.txt",
+    "static/media/Player.module.css": "/Wekios/react-gh-pages/static/media/card-back.9fdde98e.jpg",
+    "static/media/App.css": "/Wekios/react-gh-pages/static/media/table-background.ff36dcdc.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.dfaea8af.js",
+    "static/js/2.5d79d665.chunk.js",
+    "static/css/main.05d06ecc.chunk.css",
+    "static/js/main.e92e57cf.chunk.js"
+  ]
+}
