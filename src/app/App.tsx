@@ -5,12 +5,14 @@ import { LandingScreen } from "screens/LandingScreen";
 import { GameScreen } from "screens/GameScreen";
 import { Container } from "components/Container/Container";
 import { GameLinks } from "features/Game/StartGameLinks";
+import { RuleBook } from "screens/RuleBook";
 
 function App() {
   return (
     <main className="app">
       <Router>
         <Switch>
+          <Route path="/rule-book" component={RuleBook} />
           <Route path="/game/:playerCount" component={GameScreen} />
           <Route path="/" component={LandingScreen} exact />
           <Route path="*" component={NotFoundScreen} />

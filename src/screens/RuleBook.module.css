@@ -1,0 +1,13 @@
+.startLink {
+  margin: 2rem auto;
+  padding: 1rem 3rem;
+  font-size: 24px;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s;
+  text-decoration: none;
+}
+
+.startLink:hover,
+.startLink:active {
+  background-color: rgba(255, 255, 255, 0.2);
+}

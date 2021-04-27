@@ -40,7 +40,7 @@ export function Player(player: PlayerProps) {
             key={card.code}
             className={cardClassName}
             cardIndex={cardIndex}
-            disable={!isUser}
+            disable={!turnToPlay}
             onCardPick={() => setPickedCardIndex(cardIndex)}
             {...card}
           />

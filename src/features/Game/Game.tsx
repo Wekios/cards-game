@@ -6,7 +6,7 @@ import { DiscardPile } from "./DiscardPile";
 import { Board } from "features/Board/Board";
 import { Player } from "features/Player/Player";
 import { Loader } from "components/Loader/Loader";
-import { startGame, setRoundWinner, selectGameState } from "./gameSlice";
+import { startGame, setRoundWinner, selectGameState, setRoundStart } from "./gameSlice";
 
 interface GameProps {
   playerCount: number;
@@ -28,10 +28,11 @@ export function Game({ playerCount, isReloaded }: GameProps) {
     const winner = determineRoundWinner(discard);
     const timer = setTimeout(() => {
       dispatch(setRoundWinner({ id: winner.id, score: winner.scoreSum }));
-    }, 1000);
+      if (!isGameOver) dispatch(setRoundStart());
+    }, 2000);
 
     return () => clearTimeout(timer);
-  }, [discard, playerCount, dispatch]);
+  }, [discard, playerCount, dispatch, isGameOver]);
 
   const isLoading = status === "loading" || status === "idle";
   const isError = status === "error";

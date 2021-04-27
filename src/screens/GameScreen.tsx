@@ -13,6 +13,15 @@ export function GameScreen({ match, location, history }: RouteComponentProps<Par
   const playerCount = parseInt(match.params.playerCount);
   const isReloaded = !!new URLSearchParams(location.search).get("reload");
 
+  useEffect(() => {
+    if (isReloaded) {
+      history.replace({
+        search: "",
+      });
+    }
+    return () => {};
+  }, [isReloaded, history]);
+
   const invalidPlayerCount = (
     <Container width="narrow" tall flex centered direction="column">
       <GameLinks />
@@ -23,15 +32,6 @@ export function GameScreen({ match, location, history }: RouteComponentProps<Par
       </p>
     </Container>
   );
-
-  useEffect(() => {
-    if (isReloaded) {
-      history.replace({
-        search: "",
-      });
-    }
-    return () => {};
-  }, [isReloaded, history]);
 
   return isInPlayerCountRange(playerCount) ? (
     <Game playerCount={playerCount} isReloaded={isReloaded} />

@@ -10,6 +10,7 @@ export interface GameState {
   discard: CardDiscard[];
   status: "idle" | "loading" | "success" | "error";
   isGameOver: boolean;
+  roundCount: number;
 }
 
 const initialState: GameState = {
@@ -18,9 +19,10 @@ const initialState: GameState = {
   discard: [],
   status: "idle",
   isGameOver: false,
+  roundCount: 0,
 };
 
-export const startGame = createAsyncThunk("game/start", async (count: number, { getState }) => {
+export const startGame = createAsyncThunk("game/start", async (count: number) => {
   const response = await cardsAPI.fetchNewDeck(count);
   return { cards: response.cards, count };
 });
@@ -42,10 +44,11 @@ export const gameSlice = createSlice({
 
       state.players[id].turnToPlay = false;
 
-      if (state.players[id + 1]) {
-        state.players[id + 1].turnToPlay = true;
-      } else {
-        state.players[0].turnToPlay = true;
+      const roundStarterID = state.roundCount % state.playerCount;
+      const nextPlayer = state.players[id + 1] || state.players[0];
+
+      if (nextPlayer.id !== roundStarterID) {
+        nextPlayer.turnToPlay = true;
       }
     },
     setRoundWinner: (state, { payload }: PayloadAction<{ id: number; score: ReturnType<typeof cardValuesLookup> }>) => {
@@ -53,6 +56,11 @@ export const gameSlice = createSlice({
       state.players[id].score += score;
       state.discard = [];
       state.isGameOver = state.players[0].hand.length === 0;
+      state.roundCount++;
+    },
+    setRoundStart(state) {
+      const nextRoundStarterID = state.roundCount % state.playerCount;
+      state.players[nextRoundStarterID].turnToPlay = true;
     },
   },
   extraReducers: (builder) => {
@@ -62,6 +70,7 @@ export const gameSlice = createSlice({
     builder.addCase(startGame.fulfilled, (state, { payload }) => {
       state.playerCount = payload.count;
       state.players = dealCards(payload.cards, state.playerCount);
+      state.players[0].turnToPlay = true;
       state.status = "success";
     });
   },
@@ -69,6 +78,6 @@ export const gameSlice = createSlice({
 
 export const selectGameState = (state: RootState) => state.game;
 
-export const { setPlayedHand, setRoundWinner } = gameSlice.actions;
+export const { setPlayedHand, setRoundWinner, setRoundStart } = gameSlice.actions;
 
 export default gameSlice.reducer;

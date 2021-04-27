@@ -6,6 +6,7 @@
   margin-left: auto;
   margin-right: auto;
   animation: fadeIn 1.2s forwards;
+  padding-bottom: 1rem;
 }
 
 /* Last child is discard pile. - this is the moment where I started hating css modules */
@@ -14,16 +15,16 @@
 }
 
 .threePlayer > :last-child {
-  grid-row: 1;
-  grid-column: 2;
+  grid-row: 2;
+  grid-column: 1/-1;
 }
 
 .twoPlayer {
-  grid-template-rows: repeat(3, 1fr);
   justify-content: center;
+  grid-template-rows: repeat(2, 1fr);
 }
 
-.twoPlayer :nth-child(1) {
+.twoPlayer > :nth-child(1) {
   grid-row: 3;
 }
 
@@ -32,34 +33,29 @@
   grid-template-rows: repeat(2, 1fr);
 }
 
-.threePlayer :nth-child(1) {
-  grid-row: 2;
-  grid-column: 2;
+.threePlayer > :nth-child(1) {
+  grid-row: 3;
+  grid-column: 1 /-1;
 }
 
-.threePlayer :nth-child(3) {
+.threePlayer > :nth-child(3) {
   grid-column: 3;
 }
 
-.fourPlayer {
-  grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: 1fr 2fr 1fr;
-}
-
-.fourPlayer :nth-child(1) {
-  grid-column: 2;
+.fourPlayer > :nth-child(1) {
+  grid-column: 1/4;
   grid-row: 3;
 }
 
-.fourPlayer :nth-child(2) {
+.fourPlayer > :nth-child(2) {
   grid-row: 2;
 }
 
-.fourPlayer :nth-child(3) {
+.fourPlayer > :nth-child(3) {
   grid-column: 2;
 }
 
-.fourPlayer :nth-child(4) {
+.fourPlayer > :nth-child(4) {
   grid-column: 3;
   grid-row: 2;
 }
@@ -67,6 +63,31 @@
 .fourPlayer > :last-child {
   grid-column: 2;
   grid-row: 2;
+}
+@media screen and (max-width: 640px) {
+  .fourPlayer > :last-child > ul {
+    flex-wrap: wrap;
+  }
+
+  .fourPlayer > :last-child > ul > li {
+    flex-basis: 50%;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .twoPlayer {
+    grid-template-rows: repeat(3, 1fr);
+  }
+
+  .threePlayer > :last-child {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .threePlayer > :nth-child(1) {
+    grid-row: 2;
+    grid-column: 1/-1;
+  }
 }
 
 @keyframes fadeIn {

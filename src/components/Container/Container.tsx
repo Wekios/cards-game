@@ -10,6 +10,7 @@ export interface ContainerProps<As extends React.ElementType = React.ElementType
   className?: string;
   width?: "wide" | "regular" | "narrow";
   direction?: "row" | "column";
+  padded?: boolean;
 }
 
 export function Container({
@@ -20,6 +21,7 @@ export function Container({
   direction = "row",
   tall,
   centered,
+  padded,
   ...rest
 }: React.PropsWithChildren<ContainerProps>) {
   className = cn(
@@ -30,6 +32,7 @@ export function Container({
       [styles.flex]: flex,
       [styles.centered]: centered,
       [styles.tall]: tall,
+      [styles.padded]: padded,
     },
     className
   );
