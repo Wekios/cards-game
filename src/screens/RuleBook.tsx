@@ -28,9 +28,9 @@ export function RuleBook() {
           <li>
             Every player picks a card and the highest card wins and takes all of the cards that other players discarded
           </li>
-          <li>Values of cards are A=1, 2 do 10 = number value on the card, J=12, Q=13, K=14</li>
+          <li>Values of cards are A=1, 2 to 10 = number value on the card, J=12, Q=13, K=14</li>
           <li>
-            If there are cards of equal value on the table the last player that throw <strong>that</strong> card takes
+            If there are cards of equal value on the table the last player that threw <strong>that</strong> card takes
             all
           </li>
           <li>Game ends when all of the players have played their cards</li>
