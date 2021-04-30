@@ -23,12 +23,12 @@ export function Game({ playerCount, isReloaded }: GameProps) {
 
   // Determine round winner
   useEffect(() => {
-    if (discard.length !== playerCount) return;
+    if (discard.length !== playerCount || isGameOver) return;
 
     const winner = determineRoundWinner(discard);
     const timer = setTimeout(() => {
       dispatch(setRoundWinner({ id: winner.id, score: winner.scoreSum }));
-      if (!isGameOver) dispatch(setRoundStart());
+      dispatch(setRoundStart());
     }, 2000);
 
     return () => clearTimeout(timer);

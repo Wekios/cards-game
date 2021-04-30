@@ -34,8 +34,8 @@ export function RuleBook() {
             all
           </li>
           <li>Game ends when all of the players have played their cards</li>
-          <li>Player with the highest score (sum of all the cards he took previously) wins.</li>
-          <li>In case of tie the winning place is shared</li>
+          <li>Player with the highest score (sum of all the cards he took previously) wins</li>
+          <li>In case of a tie the winning place is shared</li>
         </ul>
       </code>
       <Link className={cn(styles.startLink, "text-white")} to="/">
